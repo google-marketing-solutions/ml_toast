@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC.
+# Copyright 2023 Google LLC.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -36,13 +36,13 @@ to the morphological irregularities and substantial word inflections in
 different languages. As a result, this module does not cover these concepts.
 """
 
+import logging
 import os
 import pathlib
 from typing import Mapping, Sequence, Tuple
 
 from absl import app
 from absl import flags
-from absl import logging
 
 import hyperopt
 import pandas as pd

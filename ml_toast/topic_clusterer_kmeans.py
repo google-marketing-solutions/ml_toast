@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC.
+# Copyright 2023 Google LLC.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -233,6 +233,6 @@ class TopicClustererKmeans(topic_clusterer.TopicClusterer):
       word_filter = True
       for word in self.stop_words:
         word_filter &= ~candidate_clusters.index.str.contains(word)
-      candidate_clusters = candidate_clusters[filter]
+      candidate_clusters = candidate_clusters[word_filter]
 
     return candidate_clusters[0:max_recommendations].index.to_list()

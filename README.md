@@ -1,4 +1,4 @@
-<img align="left" width="150" src="https://services.google.com/fh/files/misc/ml_toast_logo.png" alt="ml_toast_logo"></img><br><br>
+<img align="left" width="150" src="https://services.google.com/fh/files/misc/ml_toast_logo.png" alt="ml_toast_logo"></img><br>
 
 # 🍞 ML-ToAST: <b>M</b>ulti<b>l</b>ingual <b>To</b>pic Clustering of <b>A</b>ds-triggering <b>S</b>earch <b>T</b>erms<br><br>
 

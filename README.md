@@ -147,25 +147,7 @@ Google Colaboratory via the link below:
 The notebook provides an easy to use interface for configuring and running
 ML-ToAST, along with a code walkthrough and results visualization.
 
-Alternatively, you can install ML-ToAST via [PyPI](https://pypi.org/project/ml-toast/):
-
-```shell
-pip install ml-toast
-```
-
-and use it directly in your code:
-
-```python
-import ml_toast
-
-topic_clustering = ml_toast.topic_clustering.TopicClustering(
-    # add desired initialization parameters
-)
-topics_kmeans, topics_hdbscan = topic_clustering.determine_topics(
-    data) # where data is a Pandas dataframe containing the corpus to cluster
-```
-
-or build it using the provided `requirements.txt`:
+Alternatively, you can build ML-ToAST using the provided `requirements.txt`:
 
 ```shell
 pip install -r requirements.txt

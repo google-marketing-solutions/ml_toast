@@ -8,7 +8,8 @@
 
 [What it solves](#challenges) •
 [How it works](#solution-overview) •
-[Get started](#get-started)
+[Get started](#get-started) •
+[References](#references)
 
 ## Overview
 
@@ -248,3 +249,22 @@ and run `topic_clustering.py` manually passing in the desired arguments:
 > accordingly might need to be built from source. Refer to these
 > [instructions](https://github.com/tensorflow/text#a-note-about-different-operating-system-packages)
 > for more information.
+
+## Citing ML-ToAST
+
+To cite this repository:
+
+```
+@software{ml_toast_github,
+  author = {Mohab Fekry and Christiane Ahlheim and Victor Paunescu},
+  title = {🍞 ML-ToAST: Multilingual Topic Clustering of Ads-triggering Search Terms},
+  url = {https://github.com/google/ml_toast},
+  version = {0.1.0},
+  year = {2023},
+}
+```
+
+## References
+
+- [Kong, J., Scott, A., & Goerg, G. M. (2016). Improving topic clustering on search queries with word co-occurrence and bipartite graph co-clustering. Google Research.](https://research.google/pubs/pub45569/)
+

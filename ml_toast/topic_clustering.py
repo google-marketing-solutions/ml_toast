@@ -113,9 +113,9 @@ _FLAG_UMAP_N_COMPONENTS = flags.DEFINE_integer(
     f"{_CLUSTERING_PARAMS['umap_n_components']}")
 _FLAG_UMAP_RANDOM_STATE = flags.DEFINE_integer(
     'umap_random_state', _CLUSTERING_PARAMS['umap_random_state'],
-    'random_state hyperparameter for UMAP. Defaults to '
+    'random seed for UMAP. Defaults to '
     f"{_CLUSTERING_PARAMS['umap_random_state']}. Consider setting an explicit "
-    'value here (e.g. 32) to maintain reproducability')
+    'value (e.g. 32) for reproducability')
 _FLAG_HDBSCAN_MIN_CLUSTER_SIZE = flags.DEFINE_integer(
     'hdbscan_min_cluster_size', _CLUSTERING_PARAMS['hdbscan_min_cluster_size'],
     'min_cluster_size hyperparameter for HDBSCAN. Defaults to '

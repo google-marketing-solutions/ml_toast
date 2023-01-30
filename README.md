@@ -173,6 +173,7 @@ and run `topic_clustering.py` manually passing in the desired arguments:
                         [--kmeans_clusters=<KMEANS_CLUSTERS>]
                         [--umap_n_neighbors=<UMAP_N_NEIGHBORS>]
                         [--umap_n_components=<UMAP_N_COMPONENTS>]
+                        [--umap_random_state=<UMAP_RANDOM_STATE>]
                         [--hdbscan_min_cluster_size=<HDBSCAN_MIN_CLUSTER_SIZE>]
                         [--hdbscan_min_samples=<HDBSCAN_MIN_SAMPLES>]
                         [--opt_threshold_unclustered=<OPT_THRESHOLD_UNCLUSTERED>]
@@ -218,6 +219,11 @@ and run `topic_clustering.py` manually passing in the desired arguments:
   --umap_n_components=<UMAP_N_COMPONENTS>
                         hyperparameter 'n_components' for UMAP. Defaults to 30.
                         See https://umap-learn.readthedocs.io/en/latest/parameters.html#n_components
+                        for more information.
+  --umap_random_state=<UMAP_RANDOM_STATE>
+                        random seed for UMAP. Defaults to None.
+                        Consider setting an explicit value (e.g. 32) for
+                        reproducability. See https://umap-learn.readthedocs.io/en/latest/reproducibility.html
                         for more information.
   --hdbscan_min_cluster_size=<HDBSCAN_MIN_CLUSTER_SIZE>
                         hyperparameter 'min_cluster_size' for HDBSCAN. Defaults

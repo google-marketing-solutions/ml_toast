@@ -23,7 +23,7 @@ Under the hood, the tool relies on Google's
 model to generate word embeddings, applies a couple of widely-used clustering
 algorithms - namely
 [K-Means](https://www.tensorflow.org/versions/r2.0/api_docs/python/tf/compat/v1/estimator/experimental/KMeans)
-and [HDBSCAN](https://hdbscan.readthedocs.io/en/latest/index.html) (with
+and [HDBSCAN](https://hdbscan.readthedocs.io/en/latest/) (with
 [UMAP](https://umap-learn.readthedocs.io/en/latest/) dimensionality reduction) -
 to generate clusters, and then selects the most meaningful term(s) to represent
 each cluster.
@@ -33,8 +33,9 @@ takes place directly in this notebook, and the resulting topics are output back
 into the same spreadsheet. In other words, all data remains **private** - only
 visible to and in the control of the tool's user.
 
-Though the samples provided here are specific to Google Ads, the logic can quite
-seamlessly be tweaked to work with any other advertising platform.
+Though the samples provided here are specific to Google Ads, the same approach
+can quite seamlessly be used for any other advertising platform, or simply for
+any application where clustering of short texts is the goal.
 
 ## Challenges
 
@@ -110,8 +111,11 @@ and analyzed to shed some light into BM's performance.
 The figure below provides an overview of the core functionality of ML-ToAST.
 
 <center>
-<img src="https://services.google.com/fh/files/misc/ml_toast_diagram.png" alt="ml_toast_diagram"></img><br>
-Fig. 1. ML-ToAST Process Diagram
+  <img
+    src="https://services.google.com/fh/files/misc/ml_toast_diagram.png"
+    alt="ml_toast_diagram"
+  />
+  <p>Fig. 1. ML-ToAST Process Diagram</p>
 </center>
 
 ### Which search terms to extract?
@@ -183,53 +187,53 @@ and run `topic_clustering.py` manually passing in the desired arguments:
   --csv_data_path=<INPUT_DATA_PATH>
                         path to a csv file containing the data to use. Defaults
                         to the path 'samples/data.csv' relative to the current
-                        (root) directory
+                        (root) directory.
   --output_path=<OUTPUT_DATA_PATH>
                         path where the output should be stored. Defaults to the
                         path 'output/data.csv' relative to the current (root)
-                        directory
+                        directory.
   --data_id=<INPUT_DATA_ID>
                         identifier of the input data. Useful for logging when
                         running the module with different inputs. Defaults to
-                        the value 'data'
+                        the value 'data'.
   --input_col=<INPUT_DATA_COL>
                         column in the input data corresponding to the
-                        documents to cluster. Defaults to the value 'document'
+                        documents to cluster. Defaults to the value 'document'.
   --output_kmeans_col=<OUTPUT_KMEANS_COLUMN>
                         column to write the generated K-Means cluster
-                        assignments to. Defaults to the value 'topics_kmeans'
+                        assignments to. Defaults to the value 'topics_kmeans'.
   --output_hdbscan_col=<OUTPUT_HDBSCAN_COLUMN>
                         column to write the generated HDBSCAN cluster
-                        assignments to. Defaults to the value 'topics_hdbscan'
+                        assignments to. Defaults to the value 'topics_hdbscan'.
   --stop_words=<STOP_WORDS>
                         list of custom words to use as stop words for the
-                        generated topic labels. Defaults to None
+                        generated topic labels. Defaults to None.
   --kmeans_clusters=<KMEANS_CLUSTERS>
                         list of clusters to use to identify the optimal value of
-                        K. Defaults to the range 5-15
+                        K. Defaults to the range 5-15.
   --umap_n_neighbors=<UMAP_N_NEIGHBORS>
                         hyperparameter 'n_neighbors' for UMAP. Defaults to 15.
                         See https://umap-learn.readthedocs.io/en/latest/parameters.html#n-neighbors
-                        for more information
+                        for more information.
   --umap_n_components=<UMAP_N_COMPONENTS>
                         hyperparameter 'n_components' for UMAP. Defaults to 30.
                         See https://umap-learn.readthedocs.io/en/latest/parameters.html#n_components
-                        for more information
+                        for more information.
   --hdbscan_min_cluster_size=<HDBSCAN_MIN_CLUSTER_SIZE>
                         hyperparameter 'min_cluster_size' for HDBSCAN. Defaults
                         to 20. See
                         https://hdbscan.readthedocs.io/en/latest/parameter_selection.html#selecting-min-cluster-size
-                        for more information
+                        for more information.
   --hdbscan_min_samples=<HDBSCAN_MIN_SAMPLES>
                         hyperparameter 'min_samples' for HDBSCAN. Defaults to 5.
                         See https://hdbscan.readthedocs.io/en/latest/parameter_selection.html#selecting-min-samples
-                        for more information
+                        for more information.
   --opt_threshold_unclustered=<OPT_THRESHOLD_UNCLUSTERED>
                         1 of 2 thresholds for optimizing generated HDBSCAN
                         clusters through linear regression. This represents the
                         threshold for clustering unassigned data points (HDBSCAN
                         label = -1). Defaults to assign data points with at
-                        least 40% (0.4) predicted cluster assignment confidence
+                        least 40% (0.4) predicted cluster assignment confidence.
   --opt_threshold_recluster=<OPT_THRESHOLD_RECLUSTER>
                         1 of 2 thresholds for optimizing generated HDBSCAN
                         clusters through linear regression. This represents the
@@ -237,11 +241,11 @@ and run `topic_clustering.py` manually passing in the desired arguments:
                         label != -1). Defaults to reassign data points with at
                         least 80% (0.8) predicted cluster assignment confidence
                         from their original HDBSCAN cluster to their predicted
-                        cluster
+                        cluster.
   --hyperparameter_tuning --nohyperparameter_tuning
                         whether to perform bayesian optimization to find the
                         optimal hyperparameters for UMAP + HDBSCAN or not.
-                        Defaults to True
+                        Defaults to True.
   ```
 
 > Please note that ML-ToAST relies on the `tensorflow-text` package, which is

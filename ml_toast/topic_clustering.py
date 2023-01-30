@@ -39,7 +39,7 @@ different languages. As a result, this module does not cover these concepts.
 import logging
 import os
 import pathlib
-from typing import Mapping, Sequence, Tuple
+from typing import Mapping, Optional, Sequence, Tuple
 
 from absl import app
 from absl import flags
@@ -64,6 +64,7 @@ _KMEANS_CLUSTERS = range(5, 16)
 _CLUSTERING_PARAMS = {
     'umap_n_neighbors': 15,
     'umap_n_components': 30,
+    'umap_random_state': None,
     'hdbscan_min_cluster_size': 20,
     'hdbscan_min_samples': 5,
     'threshold_unclustered': 0.4,
@@ -110,6 +111,11 @@ _FLAG_UMAP_N_COMPONENTS = flags.DEFINE_integer(
     'umap_n_components', _CLUSTERING_PARAMS['umap_n_components'],
     'n_components hyperparameter for UMAP. Defaults to '
     f"{_CLUSTERING_PARAMS['umap_n_components']}")
+_FLAG_UMAP_RANDOM_STATE = flags.DEFINE_integer(
+    'umap_random_state', _CLUSTERING_PARAMS['umap_random_state'],
+    'random_state hyperparameter for UMAP. Defaults to '
+    f"{_CLUSTERING_PARAMS['umap_random_state']}. Consider setting an explicit "
+    'value here (e.g. 32) to maintain reproducability')
 _FLAG_HDBSCAN_MIN_CLUSTER_SIZE = flags.DEFINE_integer(
     'hdbscan_min_cluster_size', _CLUSTERING_PARAMS['hdbscan_min_cluster_size'],
     'min_cluster_size hyperparameter for HDBSCAN. Defaults to '
@@ -164,14 +170,14 @@ class TopicClustering(object):
   def __init__(self,
                data_id: str = _INPUT_DATA_ID,
                input_col: str = _INPUT_DATA_COLUMN,
-               stop_words: Sequence[str] = _STOP_WORDS,
+               stop_words: Optional[Sequence[str]] = None,
                kmeans_clusters: Sequence[int] = _KMEANS_CLUSTERS,
-               hdbscan_clustering_params: Mapping[str, int] = None,
+               hdbscan_clustering_params: Optional[Mapping[str, int]] = None,
                do_hdbscan_hyperopt=_HYPERPARAMETER_TUNING) -> None:
     """Initializer."""
     self.data_id = data_id
     self.input_col = input_col
-    self.stop_words = stop_words
+    self.stop_words = stop_words or _STOP_WORDS
     self.kmeans_clusters = kmeans_clusters
     self.hdbscan_clustering_params = (
         hdbscan_clustering_params or _CLUSTERING_PARAMS)
@@ -181,6 +187,8 @@ class TopicClustering(object):
             hyperopt.hp.choice('umap_n_neighbors', range(5, 31)),
         'umap_n_components':
             hyperopt.hp.choice('umap_n_components', range(5, 31)),
+        'umap_random_state':
+            self.hdbscan_clustering_params.get('umap_random_state', None),
         'hdbscan_min_cluster_size':
             hyperopt.hp.choice('hdbscan_min_cluster_size', range(5, 31)),
         'hdbscan_min_samples':
@@ -223,6 +231,7 @@ def main(argv: Sequence[str]) -> None:
   clustering_params = {
       'umap_n_neighbors': _FLAG_UMAP_N_NEIGHBORS.value,
       'umap_n_components': _FLAG_UMAP_N_COMPONENTS.value,
+      'umap_random_state': _FLAG_UMAP_RANDOM_STATE.value,
       'hdbscan_min_cluster_size': _FLAG_HDBSCAN_MIN_CLUSTER_SIZE.value,
       'hdbscan_min_samples': _FLAG_HDBSCAN_MIN_SAMPLES.value,
       'threshold_unclustered': _FLAG_OPT_THRESHOLD_UNCLUSTERED.value,

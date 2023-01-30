@@ -17,7 +17,7 @@
 
 import functools
 import logging
-from typing import Any, Mapping, Sequence, Tuple, Union
+from typing import Any, Mapping, Optional, Sequence, Tuple, Union
 
 import hdbscan
 import hyperopt
@@ -200,7 +200,8 @@ class TopicClustererHdbscan(topic_clusterer.TopicClusterer):
             n_components=clustering_params['umap_n_components'],
             metric='cosine',
             min_dist=0.0,
-            random_state=32).fit_transform(embeddings))
+            random_state=clustering_params['umap_random_state']).fit_transform(
+                embeddings))
 
     clusters = (
         hdbscan.HDBSCAN(
@@ -344,8 +345,11 @@ class TopicClustererHdbscan(topic_clusterer.TopicClusterer):
     return hyperopt.space_eval(self.hyperopt_params, best), trials
 
   def recommend_topics_by_saliency(
-      self, documents: pd.Series,
-      cluster_labels: np.ndarray) -> Mapping[str, Sequence[str]]:
+      self,
+      documents: pd.Series,
+      cluster_labels: np.ndarray,
+      vectorizer: Optional[feature_extraction.text.TfidfVectorizer] = None
+  ) -> Mapping[str, Sequence[str]]:
     """Recommends a list of topics for the input docs based on TF-IDF value.
 
     The `max_df` parameter is reduced from the default `1.0` to `0.8` to
@@ -356,11 +360,14 @@ class TopicClustererHdbscan(topic_clusterer.TopicClusterer):
     Args:
       documents: Pandas series with documents to recommend topics for.
       cluster_labels: Cluster assignments of the given documents.
+      vectorizer: TF-IDF vectorizer to use. Defaults to None which results in
+        initializing a new instance with the `max_df`, `ngram_range` and
+        `stop_words params as specified in the description.
 
     Returns:
       A dict of input cluster label identifier to list of recommended topics.
     """
-    vectorizer = feature_extraction.text.TfidfVectorizer(
+    vectorizer = vectorizer or feature_extraction.text.TfidfVectorizer(
         max_df=0.8, ngram_range=(1, 2), stop_words=self.stop_words)
     vectorizer.fit(documents)
     candidate_cluster_names = vectorizer.get_feature_names_out()

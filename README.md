@@ -13,8 +13,8 @@
 
 ## Overview
 
-**ML-ToAST** is an open-source tool that helps users cluster multilingual search
-terms captured from different time windows into semantically relevant topics. It
+**🍞 ML-ToAST** is a tool that helps users cluster multilingual search terms
+captured from different time windows into semantically relevant topics. It
 helps advertisers / marketers surface the topics or *themes* their audience are
 interested in, so that they can tailor their marketing activities accordingly.
 
@@ -27,11 +27,6 @@ and [HDBSCAN](https://hdbscan.readthedocs.io/en/latest/) (with
 [UMAP](https://umap-learn.readthedocs.io/en/latest/) dimensionality reduction) -
 to generate clusters, and then selects the most meaningful term(s) to represent
 each cluster.
-
-Input is provided via a Google Sheets spreadsheet, preprocessing and clustering
-takes place directly in this notebook, and the resulting topics are output back
-into the same spreadsheet. In other words, all data remains **private** - only
-visible to and in the control of the tool's user.
 
 Though the samples provided here are specific to Google Ads, the same approach
 can quite seamlessly be used for any other advertising platform, or simply for
@@ -96,51 +91,30 @@ including performance metrics.
 
 ## Solution Overview
 
-ML-ToAST tackles the challenges mentioned above in a simple, configurable and
+🍞 ML-ToAST tackles the challenges mentioned above in a simple, configurable and
 privacy-safe way. It relies on a Google Sheets spreadsheet as input, where
-search terms from different lookback windows can be compared (see the ***Which
-search terms to extract?*** section below for more information) to uncover only
+search terms from different lookback windows can be compared to uncover only
 those that are *new*, and/or also those that have not received enough
-impressions (configurable - defaults to 1000). This represents the corpus of
+impressions (configurable - unset by default). This represents the corpus of
 search terms that can be further analyzed and categorized into semantically
 relevant topics.
 
 Additional input groups pertaining to Google Ads Broad Match (BM) are also built
-and analyzed to shed some light into BM's performance.
+and analyzed to:
 
-The figure below provides an overview of the core functionality of ML-ToAST.
+* Provide more transparency into BM's performance; and
+* Give advertisers more control via keyword recommendations that they could
+  add to / exclude from BM.
+
+The figure below provides an overview of the core functionality of the tool.
 
 <center>
   <img
     src="https://services.google.com/fh/files/misc/ml_toast_diagram.png"
     alt="ml_toast_diagram"
   />
-  <p>Fig. 1. ML-ToAST Process Diagram</p>
+  <p>Fig. 1. 🍞 ML-ToAST Process Diagram</p>
 </center>
-
-### Which search terms to extract?
-
-We recommend extracting the Google Ads
-[Search Terms report](https://support.google.com/google-ads/answer/2472708) for
-the following periods: ***Last 30 days** (e.g. Nov 1 - Nov 30): it generally
-makes sense to look at the most recent search terms that triggered your ads.*
-**Previous 30/31 days** (e.g. Oct 1 - Oct 31): this helps provide information on
-those search terms that constitute your core business over those that are
-recently trending. * **Last 30 days last year** (e.g. Nov 1 - Nov 30 of the
-previous year): to account for seasonality effects (e.g. holiday season).
-
-We also recommend restricting the extracted search terms to a subset of
-*related* campaigns (e.g. all campaigns for a specific *product line* or
-*operating domain*) rather than all campaigns in your account. This allows the
-models applied here to better capture how the search terms relate to one
-another, and therefore, extract more meaningful topics.
-
-The report can be downloaded from the Google Ads UI in CSV format and imported
-into a Google Sheets spreadsheet.
-
-*Note: if you have multiple accounts operating under the same product line or
-domain, you can extract search terms from those accounts as well and group them
-all into the same Google Sheets spreadsheet.*
 
 ### Get Started
 
@@ -150,9 +124,9 @@ Google Colaboratory via the link below:
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/google/ml_toast/blob/main/ml_toast.ipynb)
 
 The notebook provides an easy to use interface for configuring and running
-ML-ToAST, along with a code walkthrough and results visualization.
+🍞 ML-ToAST, along with a code walkthrough and results visualization.
 
-Alternatively, you can build ML-ToAST using the provided `requirements.txt`:
+Alternatively, you can build 🍞 ML-ToAST using the provided `requirements.txt`:
 
 ```shell
 pip install -r requirements.txt
@@ -254,13 +228,13 @@ and run `topic_clustering.py` manually passing in the desired arguments:
                         Defaults to True.
   ```
 
-> Please note that ML-ToAST relies on the `tensorflow-text` package, which is
+> Please note that the tool relies on the `tensorflow-text` package, which is
 > no longer available for all platforms (e.g. Apple Macs and Windows) and
 > accordingly might need to be built from source. Refer to these
 > [instructions](https://github.com/tensorflow/text#a-note-about-different-operating-system-packages)
 > for more information.
 
-## Citing ML-ToAST
+## Citing 🍞 ML-ToAST
 
 To cite this repository:
 

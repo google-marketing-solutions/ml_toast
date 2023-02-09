@@ -24,7 +24,7 @@ approaches are used to generate semantically relevant labels for them:
 
 1.  K-Means: Count the most repeated words in the corpus (after stop words
     removal*), generate embeddings with USE-M, and then select the embedding
-    with the highest cosine similiarity to each cluster's center.
+    with the highest cosine similarity to each cluster's center.
 2.  HDBSCAN: Fit a TF-IDF vectorizer to the corpus and select the top three
     unigrams / bigrams per cluster with high TF-IDF values.
 

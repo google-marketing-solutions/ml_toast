@@ -47,7 +47,7 @@ searching for and engaging with their business, in order to understand:
     creatives, to match changing consumer interest.
 
 One of the approaches advertisers rely on is analyzing search queries against
-which their ads appear, categorising these queries into meaningful themes, and
+which their ads appear, categorizing these queries into meaningful themes, and
 analyzing themes to generate insights.
 
 > ***Topic clustering requires both time and expertise to execute properly, and
@@ -68,8 +68,8 @@ Google's standards on data privacy.
 > meaningful insights.***
 
 Google Ads employs several different
-[search automation](https://services.google.com/fh/files/misc/unlock_the_power_of_search_2022.pdf)
-and optimization features, one of which is Broad Match. Whereas other keyword
+[AI-powered search](https://services.google.com/fh/files/misc/unlock_the_power_of_search_2022.pdf)
+optimization features, one of which is Broad Match. Whereas other keyword
 matching types focus only on syntax,
 [Broad Match](https://support.google.com/google-ads/answer/12159290) applies
 matching based on semantics - the meaning conveyed by a search - in addition to

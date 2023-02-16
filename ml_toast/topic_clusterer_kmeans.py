@@ -15,7 +15,7 @@
 """Topic Clusterer implementation for K-Means on Cosine Distance."""
 
 import logging
-from typing import Any, Sequence, Tuple
+from typing import Any, Optional, Sequence, Tuple
 
 
 import numpy as np
@@ -154,7 +154,8 @@ class TopicClustererKmeans(topic_clusterer.TopicClusterer):
       embeddings: tf.Tensor,
       num_clusters: int,
       predict: bool = True,
-      max_train_iterations: int = 10) -> Tuple[np.ndarray, np.ndarray]:
+      max_train_iterations: int = 10,
+      random_seed: Optional[int] = None) -> Tuple[np.ndarray, np.ndarray]:
     """Generates clusters of input vectors using K-Means on cosine distance.
 
     Trains K-Means for `max_train_iterations` and stops training once the score
@@ -168,6 +169,7 @@ class TopicClustererKmeans(topic_clusterer.TopicClusterer):
       predict: Whether to train only or also predict. Defaults to the latter.
       max_train_iterations: Maximum number of iterations for training K-Means.
         Defaults to 10.
+      random_seed: Optional seed for K-Means. Defaults to None.
 
     Returns:
       A list of cluster assignments for every input document.
@@ -175,7 +177,7 @@ class TopicClustererKmeans(topic_clusterer.TopicClusterer):
     kmeans = tf.compat.v1.estimator.experimental.KMeans(
         num_clusters=num_clusters,
         use_mini_batch=False,
-        seed=32,
+        seed=random_seed,
         distance_metric=(
             tf.compat.v1.estimator.experimental.KMeans.COSINE_DISTANCE))
 

@@ -113,26 +113,25 @@ The figure below provides an overview of the core functionality of the tool.
     src="https://services.google.com/fh/files/misc/ml_toast_diagram.png"
     alt="ml_toast_diagram"
   />
-  <p>Fig. 1. 🍞 ML-ToAST Process Diagram</p>
 </center>
 
 ### Get Started
 
-The quickest way to get started is to load the `ml_toast.ipynb` notebook in
-Google Colaboratory via the link below:
+The quickest way to get started with 🍞 ML-ToAST is to load the `ml_toast.ipynb`
+notebook in Google Colaboratory via the link below:
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/google/ml_toast/blob/main/ml_toast.ipynb)
 
-The notebook provides an easy to use interface for configuring and running
-🍞 ML-ToAST, along with a code walkthrough and results visualization.
+The notebook provides an easy to use interface for configuring and running the
+tool, along with a code walkthrough and results visualization.
 
-Alternatively, you can build 🍞 ML-ToAST using the provided `requirements.txt`:
+Alternatively, you can build the tool using the provided `requirements.txt`:
 
 ```shell
 pip install -r requirements.txt
 ```
 
-and run `topic_clustering.py` manually passing in the desired arguments:
+and run `topic_clustering.py` manually, passing in the desired arguments:
 
   Usage:
 
@@ -234,14 +233,14 @@ and run `topic_clustering.py` manually passing in the desired arguments:
 > [instructions](https://github.com/tensorflow/text#a-note-about-different-operating-system-packages)
 > for more information.
 
-## Citing 🍞 ML-ToAST
+## Citing ML-ToAST
 
 To cite this repository:
 
 ```
 @software{ml_toast_github,
   author = {Mohab Fekry and Christiane Ahlheim and Victor Paunescu},
-  title = {🍞 ML-ToAST: Multilingual Topic Clustering of Ads-triggering Search Terms},
+  title = {ML-ToAST: Multilingual Topic Clustering of Ads-triggering Search Terms},
   url = {https://github.com/google/ml_toast},
   version = {0.1.0},
   year = {2023},

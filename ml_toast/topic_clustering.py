@@ -238,13 +238,16 @@ def main(argv: Sequence[str]) -> None:
       'threshold_recluster': _FLAG_OPT_THRESHOLD_RECLUSTER.value,
   }
 
-  input_path = os.path.join(
-      os.path.dirname(__file__), _FLAG_INPUT_DATA_PATH.value)
-  if not pathlib.Path.exists(input_path):
+  input_path = os.path.abspath(
+      os.path.join(
+          os.path.dirname(__file__), os.pardir, _FLAG_INPUT_DATA_PATH.value))
+  if not pathlib.Path.exists(pathlib.Path(input_path)):
     raise ValueError(f'Could not find data at input path: "{input_path}"!')
 
   input_data = pd.read_csv(input_path)
-  if not input_data or not input_data[_FLAG_INPUT_DATA_COLUMN.value]:
+  if (
+      input_data.empty
+      or _FLAG_INPUT_DATA_COLUMN.value not in input_data.columns):
     raise ValueError(
         f'Empty or missing column "{_FLAG_INPUT_DATA_COLUMN.value}" in the '
         f'input data at path "{_FLAG_INPUT_DATA_PATH.value}"!')
@@ -262,7 +265,11 @@ def main(argv: Sequence[str]) -> None:
   input_data[_FLAG_OUTPUT_KMEANS_COLUMN.value] = topics_kmeans
   input_data[_FLAG_OUTPUT_HDBSCAN_COLUMN.value] = topics_hbdscan
   input_data.to_csv(
-      os.path.join(os.path.dirname(__file__), _FLAG_OUTPUT_DATA_PATH.value),
+      os.path.abspath(
+          os.path.join(
+              os.path.dirname(__file__),
+              os.pardir,
+              _FLAG_OUTPUT_DATA_PATH.value)),
       index=False)
 
   logging.info('END - TopicClustering')

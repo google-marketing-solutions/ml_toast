@@ -26,7 +26,8 @@ algorithms - namely
 and [HDBSCAN](https://hdbscan.readthedocs.io/en/latest/) (with
 [UMAP](https://umap-learn.readthedocs.io/en/latest/) dimensionality reduction) -
 to generate clusters, and then selects the most meaningful term(s) to represent
-each cluster.
+each cluster. Input / Output is supported via Google Sheets and Google Cloud
+BigQuery.
 
 Though the samples provided here are specific to Google Ads, the same approach
 can quite seamlessly be used for any other advertising platform, or simply for
@@ -92,14 +93,16 @@ including performance metrics.
 ## Solution Overview
 
 🍞 ML-ToAST tackles the challenges mentioned above in a simple, configurable and
-privacy-safe way. It relies on a Google Sheets spreadsheet as input, where
-search terms from different lookback windows can be compared to uncover only
-those that are *new*, and/or also those that have not received enough
-impressions (configurable - unset by default). This represents the corpus of
-search terms that can be further analyzed and categorized into semantically
-relevant topics.
+privacy-friendly way. Input is supported via a Google Sheets spreadsheet or
+Google Cloud BigQuery table. For spreadsheet-based input, search terms from
+different lookback windows can be compared (configurable) to uncover terms that
+are *new / trending*, or also those that have not received enough impressions
+(configurable - unset by default). For BigQuery, the input is used as-is,
+therefore any filtering or lookback comparison needs to be done in BigQuery
+directly. This input data represents the corpus of search terms that can be
+further analyzed and categorized into semantically relevant topics.
 
-Additional input groups pertaining to Google Ads Broad Match (BM) are also built
+Additional input groups pertaining to Google Ads Broad Match (BM) are extracted
 and analyzed to:
 
 * Provide more transparency into BM's performance; and

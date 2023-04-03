@@ -97,16 +97,19 @@ class TopicClustererKmeans(topic_clusterer.TopicClusterer):
 
     embeddings = self.model(documents)
 
-    silhouette_scores = [
-        self.calculate_silhouette_score(embeddings, num_clusters=k)
-        for k in self.clusters
-    ]
-    silhouette_scores = dict(zip(self.clusters, silhouette_scores))
-    self.optimal_k = max(silhouette_scores, key=silhouette_scores.get)
+    if len(self.clusters) == 1:
+      self.optimal_k = self.clusters[0]
+    else:
+      silhouette_scores = [
+          self.calculate_silhouette_score(embeddings, num_clusters=k)
+          for k in self.clusters
+      ]
+      silhouette_scores = dict(zip(self.clusters, silhouette_scores))
+      self.optimal_k = max(silhouette_scores, key=silhouette_scores.get)
 
-    logging.info(
-        '%s - Optimal number of clusters is %d with silhoutte score %f.',
-        self.data_id, self.optimal_k, silhouette_scores[self.optimal_k])
+      logging.info(
+          '%s - Optimal number of clusters is %d with silhoutte score %f.',
+          self.data_id, self.optimal_k, silhouette_scores[self.optimal_k])
 
     cluster_indices, cluster_centers = self.generate_clusters(
         embeddings, self.optimal_k)
@@ -183,7 +186,7 @@ class TopicClustererKmeans(topic_clusterer.TopicClusterer):
 
     def input_fn():
       return tf.compat.v1.train.limit_epochs(
-          # first convert to numpy due to v1 & eager incompatibility
+          # First convert to numpy due to v1 & eager incompatibility
           tf.convert_to_tensor(embeddings.numpy(), dtype=tf.float32),
           num_epochs=1)
 

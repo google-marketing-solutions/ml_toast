@@ -16,7 +16,7 @@
 **🍞 ML-ToAST** is a tool that helps users cluster multilingual search terms
 captured from different time windows into semantically relevant topics. It
 helps advertisers / marketers surface the topics or *themes* their audience are
-interested in, so that they can tailor their marketing activities accordingly.
+interested in, and accordingly tailor their marketing activities.
 
 Under the hood, the tool relies on Google's
 [Universal Sentence Encoder Multilingual](https://tfhub.dev/google/universal-sentence-encoder-multilingual/3)

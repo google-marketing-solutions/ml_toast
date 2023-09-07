@@ -32,6 +32,8 @@ import umap
 
 from ml_toast import topic_clusterer
 
+_MIN_SAMPLE_SIZE = 100
+
 
 def evaluate_hdbscan_clusters(
     clusters: hdbscan.HDBSCAN,
@@ -141,6 +143,15 @@ class TopicClustererHdbscan(topic_clusterer.TopicClusterer):
       documents.
     """
     logging.info('%s - Starting UMAP + HDBSCAN clustering...', self.data_id)
+
+    if len(documents) < _MIN_SAMPLE_SIZE:
+      logging.info(
+          '%s - Skipping UMAP + HDBSCAN clustering due to small input size: %d',
+          self.data_id,
+          len(documents),
+      )
+      return pd.Series([])
+
     embeddings = self.model(documents)
 
     default_clusters = self.generate_clusters(

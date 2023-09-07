@@ -100,11 +100,12 @@ class TopicClustererKmeans(topic_clusterer.TopicClusterer):
     if len(self.clusters) == 1:
       self.optimal_k = self.clusters[0]
     else:
+      num_clusters = [k for k in self.clusters if len(documents) > k]
       silhouette_scores = [
           self.calculate_silhouette_score(embeddings, num_clusters=k)
-          for k in self.clusters
+          for k in num_clusters
       ]
-      silhouette_scores = dict(zip(self.clusters, silhouette_scores))
+      silhouette_scores = dict(zip(num_clusters, silhouette_scores))
       self.optimal_k = max(silhouette_scores, key=silhouette_scores.get)
 
       logging.info(
